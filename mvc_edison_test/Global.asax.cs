@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using mvc_edison_test.Models;
 
 namespace mvc_edison_test
 {

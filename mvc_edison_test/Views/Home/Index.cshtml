@@ -10,26 +10,27 @@
         <p>Игра &quot;Загадай число&quot;</p>
         <hr />
         <p>Загадайте двузначное число и нажмите кнопку &quot;Загадал&quot;</p>
-        <input type="submit" value="Загадал" @Model.enableButton1 />
-        <hr />
-        <p>Экстрасенсы пытаются угадать число...</p>
-        <p>Экстрасенс 1 думает, что это число:@Model.extraNumber1</p>
-        <p>Экстрасенс 2 думает, что это число:@Model.extraNumber2</p>
-        <p>Экстрасенс 3 думает, что это число:@Model.extraNumber3</p>
-        <p>Давайте проверим, угадал ли кто из наших экстрасенсов загаданное Вами число. Введите Ваше двузначное число в поле и нажмите кнопку "Отправить"</p>
-        <p>
+        <input type="submit" value="Загадал" @Model.EnableButton />
+        if (@Model.EnableButton == "disabled")
+        {
+            <hr />
+            <p>Экстрасенсы пытаются угадать число...</p>
+            for (int i = 0; i < @Model.ExtrasensData.Length; i++)
+            {
+                <p>Экстрасенс @(i+1) думает, что это число:@Model.ExtrasensData[i].extraNum</p>
+            }
+            <p>Давайте проверим, угадал ли кто из наших экстрасенсов загаданное Вами число. Введите Ваше двузначное число в поле и нажмите кнопку "Отправить"</p>
             <p>@Html.ValidationSummary()</p>
-            <input id="numGamer" name="numGamer" type="text" @Model.enableButton2 value="" />
-            <input type="submit" value="Отправить" @Model.enableButton2 />
-        </p>
+            <input id="GamerNum" name="GamerNum" type="text" value="" />
+            <input type="submit" value="Отправить" />
+        }
         <hr />
-        <p>Загаданные Вами числа ранее:@Model.historyGamer</p>
-        <p>Экстрасенс 1, текущий уровень достоверности:@Model.extraRate1</p>
-        <p>Экстрасенс 1, история догадок:@Model.historyExtra1</p>
-        <p>Экстрасенс 2, текущий уровень достоверности:@Model.extraRate2</p>
-        <p>Экстрасенс 2, история догадок:@Model.historyExtra2</p>
-        <p>Экстрасенс 3, текущий уровень достоверности:@Model.extraRate3</p>
-        <p>Экстрасенс 3, история догадок:@Model.historyExtra3</p>
+        <p>Загаданные Вами числа ранее:@Model.GamerHistory</p>
+        for (int i = 0; i < @Model.ExtrasensData.Length; i++)
+        {
+            <p>Экстрасенс @(i+1), текущий уровень достоверности:@Model.ExtrasensData[i].extraRate.ToString()</p>
+            <p>Экстрасенс @(i+1), история догадок:@Model.ExtrasensData[i].extraHistory</p>
+        }
     }
 </div>
 
